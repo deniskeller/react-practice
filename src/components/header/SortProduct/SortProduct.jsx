@@ -21,7 +21,7 @@ function SortProduct({ items }) {
   };
 
   const computedActivValue = () => {
-    const activeValue = items[selectItem];
+    const activeValue = items[selectItem].name;
     return activeValue;
   };
 
@@ -55,10 +55,10 @@ function SortProduct({ items }) {
               items.map((item, index) => (
                 <li
                   onClick={() => onSelectItem(index)}
-                  key={index + item}
+                  key={index + item.type}
                   className={selectItem === index ? "active" : ""}
                 >
-                  {item}
+                  {item.name}
                 </li>
               ))}
           </ul>

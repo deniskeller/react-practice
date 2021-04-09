@@ -1,8 +1,20 @@
+import React from "react";
+import { Route } from "react-router-dom";
+import axios from "axios";
 import { Header } from "./components/index";
 import { Cart, Products } from "./pages/index";
-import { Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getProducts } from "./redux/actions/products";
 
 function App() {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    axios
+      .get("http://localhost:3000/db.json")
+      .then((response) => dispatch(getProducts(response.data.pizzas)));
+  }, []);
+
   return (
     <div className="wrapper">
       <Header />
