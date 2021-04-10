@@ -1,27 +1,35 @@
 import React from "react";
 
-function SortProduct({ items }) {
+const SortProduct = React.memo(({ items, activeSortByType, onClickItem }) => {
   const [sortVisible, setSortVisible] = React.useState(false);
-  const [selectItem, setSelectItem] = React.useState(0);
   const sortRef = React.useRef();
 
   const toggleSortVisible = () => {
     setSortVisible(!sortVisible);
   };
 
-  const handlerOutsideSort = (e) => {
-    if (!e.path.includes(sortRef.current)) {
+  const handlerOutsideSort = (event) => {
+    const path =
+      event.path ||
+      (event.composedPath && event.composedPath()) ||
+      event.composedPath(event.target);
+    if (!path.includes(sortRef.current)) {
       setSortVisible(false);
     }
+    // const path = event.path || (event.composedPath && event.composedPath());
+    // if (!path.includes(sortRef.current)) {
+    //   setSortVisible(false);
+    // }
   };
 
-  const onSelectItem = (index) => {
-    setSelectItem(index);
+  const onSelectItem = (item) => {
+    onClickItem(item);
     setSortVisible(false);
   };
 
   const computedActivValue = () => {
-    const activeValue = items[selectItem].name;
+    const activeValue = items.find((item) => item.type === activeSortByType)
+      .name;
     return activeValue;
   };
 
@@ -54,9 +62,9 @@ function SortProduct({ items }) {
             {[] &&
               items.map((item, index) => (
                 <li
-                  onClick={() => onSelectItem(index)}
+                  onClick={() => onSelectItem(item)}
                   key={index + item.type}
-                  className={selectItem === index ? "active" : ""}
+                  className={activeSortByType === item.type ? "active" : ""}
                 >
                   {item.name}
                 </li>
@@ -66,6 +74,6 @@ function SortProduct({ items }) {
       )}
     </div>
   );
-}
+});
 
 export default SortProduct;

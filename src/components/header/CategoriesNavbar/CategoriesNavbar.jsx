@@ -1,10 +1,8 @@
 import React from "react";
 
-function CategoriesNavbar({ items }) {
-  const [selectItem, setSelectItem] = React.useState(null);
-
+const CategoriesNavbar = React.memo(({ selectItem, items, onClickItem }) => {
   const onSelectItem = (index) => {
-    setSelectItem(index);
+    onClickItem(index);
   };
 
   return (
@@ -29,6 +27,6 @@ function CategoriesNavbar({ items }) {
       </ul>
     </div>
   );
-}
+});
 
 export default CategoriesNavbar;

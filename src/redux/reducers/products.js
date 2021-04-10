@@ -1,3 +1,5 @@
+import { GET_PRODUCTS, SET_LOADING } from "../actions/actionTypes";
+
 const initialState = {
   products: [],
   loading: false,
@@ -5,10 +7,16 @@ const initialState = {
 
 const products = (state = initialState, action) => {
   switch (action.type) {
-    case "GET_PRODUCTS":
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: action.payload,
+      };
+    case GET_PRODUCTS:
       return {
         ...state,
         products: action.payload,
+        loading: true,
       };
 
     default:

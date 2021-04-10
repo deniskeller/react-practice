@@ -1,8 +1,17 @@
 import React from "react";
 import classNames from "classnames";
-import PropTypes from "prop-types";
+import Button from "../../header/Button/Button";
 
-function ProductItem({ name, imageUrl, price, types, sizes }) {
+function ProductItem({
+  id,
+  name,
+  imageUrl,
+  price,
+  types,
+  sizes,
+  addProduct,
+  totalCount,
+}) {
   const productTypes = ["тонкое", "традиционное"];
   const [activeType, setActiveType] = React.useState(types[0]);
 
@@ -14,6 +23,18 @@ function ProductItem({ name, imageUrl, price, types, sizes }) {
   };
   const onSelectSize = (index) => {
     setActiveSizes(index);
+  };
+
+  const addProductList = () => {
+    const product = {
+      id,
+      name,
+      imageUrl,
+      price,
+      type: productTypes[activeType],
+      size: activeSizes,
+    };
+    addProduct(product);
   };
 
   return (
@@ -52,7 +73,8 @@ function ProductItem({ name, imageUrl, price, types, sizes }) {
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} ₽</div>
-        <div className="button button--outline button--add">
+
+        <Button className="button--add" outline onClick={addProductList}>
           <svg
             width="12"
             height="12"
@@ -66,28 +88,11 @@ function ProductItem({ name, imageUrl, price, types, sizes }) {
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
-        </div>
+          {totalCount && <i>{totalCount}</i>}
+        </Button>
       </div>
     </div>
   );
 }
-
-ProductItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  types: PropTypes.arrayOf(PropTypes.number).isRequired,
-  sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
-};
-
-ProductItem.defaultProps = {
-  name: "...",
-  imageUrl:
-    "https://dodopizza.azureedge.net/static/Img/Products/f035c7f46c0844069722f2bb3ee9f113_584x584.jpeg",
-  price: 0,
-  types: [],
-  sizes: [],
-};
 
 export default ProductItem;
