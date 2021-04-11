@@ -5,3 +5,4 @@ export { default as CategoriesNavbar } from "../components/header/CategoriesNavb
 export { default as SortProduct } from "../components/header/SortProduct/SortProduct";
 export { default as ProductItem } from "../components/content/ProductItem/ProductItem";
 export { default as LoadingItem } from "../components/content/ProductItem/LoadingItem";
+export { default as CartItem } from "../components/content/CartItem/CartItem";

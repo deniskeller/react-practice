@@ -277,6 +277,7 @@ body {
     margin: 0 auto;
     width: 560px;
     text-align: center;
+    
 
     h2 {
       font-size: 32px;
@@ -290,9 +291,10 @@ body {
       color: #777777;
     }
 
-    icon {
+    i {
       position: relative;
       top: 2px;
+      font-style: normal;
     }
 
     img {

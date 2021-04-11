@@ -44,7 +44,6 @@ function Products() {
   );
 
   const handlerAddProductToCart = (item) => {
-    console.log("item: ", item);
     dispatch(addProductToCart(item));
   };
 
@@ -71,7 +70,7 @@ function Products() {
                 key={product.id}
                 {...product}
                 totalCount={
-                  cartItems[product.id] && cartItems[product.id].length
+                  cartItems[product.id] && cartItems[product.id].items.length
                 }
                 addProduct={handlerAddProductToCart}
               />
